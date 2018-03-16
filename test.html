@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test This again</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.slick/1.5.6/slick.css">
+	<style>
+			#slideBox {
+		width: 1300px;
+		max-height: 500px;
+		overflow: hidden;
+		margin: 1% auto;
+		position: relative;
+		top: 1em;
+		background-color: #54585A;
+		border-radius: .3em;
+		}	
+		
+		video {
+			background-color: black;
+		}
+		
+		#slideBox .slick-vertical .slick-slide {
+			border: none;
+		}
+
+		.sliderSidebar {
+			width: 200px;
+			height: 500px;
+			float: left;
+		}
+		
+		#slideBox .slick-vertical .slick-slide {
+			border: none;
+		}
+		
+		
+		.sliderMain {
+			width: 900px;
+			height: 500px;
+			position: relative;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+
+
+	<div id="slideBox">
+		<!--Sidebar-->
+		<div class="sliderSidebar">
+			<div><img src="http://placehold.it/200x100"></div>
+			<div><img src="http://placehold.it/200x100"></div>
+			<div><img src="http://placehold.it/200x100"></div>
+			<div><img src="http://placehold.it/200x100"></div>
+			<div><img src="http://placehold.it/200x100"></div>
+			<div><img src="http://placehold.it/200x100/C8102E/FFFFFFF?text=Video" /></div>
+		</div>	
+			
+		<div id="main-image" class="sliderMain">
+			<div><img src="http://placehold.it/900x500"></div>
+			<div><img src="http://placehold.it/900x500"></div>
+			<div><img src="http://placehold.it/900x500"></div>
+			<div><img src="http://placehold.it/900x500"></div>
+			<div><img src="http://placehold.it/900x500"></div>
+			<div id="slide-video">
+				<video width="900px" class="theVideo" muted>
+					<source src="videos/vid.mp4" />
+				</video>
+			</div>
+		</div>
+			
+	</div><!--slideBox-->
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.slick/1.5.6/slick.min.js"></script>
+	<script>
+				$(document).ready(function(){
+			$('.sliderMain').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				arrows: false,
+				fade: true,
+				asNavFor: '.sliderSidebar',
+				autoplay: true,
+				autoplaySpeed: 3000
+			});
+			$('.sliderSidebar').slick({
+				slidesToShow: 5,
+				slidesToScroll: 1,
+				asNavFor: '.sliderMain',
+				dots: false,
+				centerMode: false,
+				focusOnSelect: true,
+				vertical: true,
+				arrows: false
+			});
+			$('.sliderMain').on('afterChange', function(event, slick, currentSlide){
+			  if (currentSlide == 5) {
+				$('.sliderMain').slick('slickPause');
+				theVideo.play();
+			  }
+            });
+
+			// document.getElementById('theVideo').addEventListener('ended',myHandler,false);
+			console.log(document.getElementsByClassName('theVideo'));
+
+		function myHandler(e) {
+			$('.sliderMain').slick('slickPlay');
+			}		
+            
+            	
+  		});
+
+
+	</script>
+</body>
+</html>
