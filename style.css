@@ -88,8 +88,8 @@ ul {
 /************************************************************************************************/
 /************************************************************************************************/
 h1{ margin:0; }
-
-.main-wrapper{ width:98%; margin:0 auto; }
+.hide{ display: none; }
+.main-wrapper{ width:100%; margin:0 auto; }
 .main{ background-color:#D5D5D5; }
 .main-2a{ background-color: #FFC3C4; }
 .main-2b{ background-color: #ACFFC5; }
@@ -104,8 +104,8 @@ h1{ margin:0; }
 .second-half .four.columns{ width:33.333%; margin-left:0; height:300px; padding:2%;}
 
 
-.img-wrapper{ text-align: center; }
-.img_post{ width:50%; margin:0 auto; float: none; }
+.image_post div, .video_post div{ text-align: center; }
+.image_post img, .video_post div video{ width:50%; }
 /************************************************************************************************/
 /************************************************************************************************/
 /*Main*/
@@ -122,15 +122,17 @@ h1{ margin:0; }
 
 
 
-@media (min-width: 550px) and (max-width: 1200px) {
+@media (min-width: 900px) and (max-width: 1200px) {
 /************************************************************************************************/
 /************************************************************************************************/
 .main-wrapper{ width:100%; margin:0 auto; }
 .first-half .seven.columns{ width: 66.5%; margin-left:0; height:400px;}
 .first-half .five.columns{ width:33.5%; margin-left:0;}
-.first-half .five.columns .twelve.columns{ height:200px;  padding:2%;}
-.second-half .four.columns{ width:33.333%; margin-left:0; height:200px; padding:2%;}
+.first-half .five.columns .twelve.columns{ height:300px;  padding:2%;}
+.second-half .four.columns{ width:33.333%; margin-left:0; height:300px; padding:2%;}
 .img_post{ width:50%; margin:0 auto; float: none; }
+p{ font-size: 0.7em; margin-bottom:0;}
+h3{ font-size:1em; margin-top:0; margin-bottom:0; }
 /************************************************************************************************/
 /************************************************************************************************/
 }
@@ -149,7 +151,12 @@ h1{ margin:0; }
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
-.first-half .seven.columns, .first-half .five.columns, .first-half .five.columns .twelve.columns, .second-half .four.columns{ width:100%; margin-left:0; height:300px;}
+.first-half .seven.columns{ width:100%; margin-left:0; }
+.first-half .five.columns{ width:100%; margin-left:0; }
+.first-half .five.columns .row{ width:100%; margin-left:0; }
+.second-half .four.columns{ width:100%; margin-left:0; }
+p{ font-size: 0.7em; margin-bottom:0;}
+h3{ font-size:1em; margin-top:0; margin-bottom:0; }
 
 /************************************************************************************************/
 /************************************************************************************************/

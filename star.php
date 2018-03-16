@@ -8,11 +8,21 @@
 5. Render announcement based on post type
 **/
 
-
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "@dm1n");
 define("DB_NAME", "cmmb2");
+define("OSAS","Office of the Student Affair and Service(OSAS)");
+define("REG","Registrar Office");
+define("COE","College of Engineering (COE)");
+define("CIT","College of Industrial Technology (CIT)");
+define("CBMA","College of Business Management and Accountancy (CBMA)");
+define("CAS","College of Arts and Sciences (CAS)");
+define("CTE","College of Teacher Education (CTE)");
+define("CCJE","College of Criminal Justice Education (CCJE)");
+define("CHMT","College of Hotel Management and Tourism (CHMT)");
+define("CCS","College of Computer Studies (CCS)");
+
 
 function db_connect() {
     $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -78,26 +88,26 @@ function get_announcement_today_by_department($department){
 	if(mysqli_num_rows($result) > 0){
 		return $result->fetch_assoc();
 	}
-	return false;
+	return array("department"=>$department,"post_type"=>"none");
 }
 
 
 function templater($announcement,$class){
 	$a = $announcement;
 	if($a["post_type"] == "text"){
-		$template = "<div class='{$class}'><p><span class='label'>Department: </span>{$a['department']}</p><h3 class='text_post'>";
+		$template = "<div class='{$class} text_post'><p><span class='label'>Department: </span>{$a['department']}</p><h3 class='text_post'><span>Announcement: </span><br>";
 		$template .= $a["content"]."</h3></div>";
 		return $template;
 	}elseif($a["post_type"] == "image"){
-		$template = "<div class='{$class}'><p><span class='label'>Department:</span>{$a['department']}</p><div class='img-wrapper'><img src='images/";
-		$template .= $a["content"]."' class='img_post'></div></div>";
+		$template = "<div class='{$class} image_post'><p><span class='label'>Department:</span>{$a['department']} <br><em>Click image to Enlarge</em></p><div><a href='images/{$a["content"]}' data-lity><img src='images/";
+		$template .= $a["content"]."' class='img_post'></a></div></div>";
 		return $template;
 	}elseif($a["post_type"] == "video"){
-		$template = "<div class='{$class}'><p><span class='label'>Department: </span>{$a['department']}</p><div style='text-align:center'><video height='150' src='videos/";
-		$template .= $a["content"]."' class='u-max-width'></div></div>";
+		$template = "<div class='{$class} video_post'><p><span class='label'>Department: </span>{$a['department']} <br><em>Click Video to Enlarge</em></p><div><video class='video' autoplay muted loop src='videos/";
+		$template .= $a["content"]."' ></div></div>";
 		return $template;
 	}else{
-		$template = "<div class='{$class}'><p class='dept_text'><span class='label'>Department: </span>".$dept;
+		$template = "<div class='{$class}'><p class='dept_text'><span class='label'>Department: </span>".$a['department'];
 		$template .= "</p><h3>No Announcement<h3></div>";
 		return $template;
 	}
