@@ -128,8 +128,8 @@ h1{ margin:0; }
 .main-wrapper{ width:100%; margin:0 auto; }
 .first-half .seven.columns{ width: 66.5%; margin-left:0; height:400px;}
 .first-half .five.columns{ width:33.5%; margin-left:0;}
-.first-half .five.columns .twelve.columns{ height:300px;  padding:2%;}
-.second-half .four.columns{ width:33.333%; margin-left:0; height:300px; padding:2%;}
+.first-half .five.columns .twelve.columns{ height:200px;  padding:2%;}
+.second-half .four.columns{ width:33.333%; margin-left:0; height:200px; padding:2%;}
 .img_post{ width:50%; margin:0 auto; float: none; }
 p{ font-size: 0.7em; margin-bottom:0;}
 h3{ font-size:1em; margin-top:0; margin-bottom:0; }
