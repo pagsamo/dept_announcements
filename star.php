@@ -22,7 +22,18 @@ define("CTE","College of Teacher Education (CTE)");
 define("CCJE","College of Criminal Justice Education (CCJE)");
 define("CHMT","College of Hotel Management and Tourism (CHMT)");
 define("CCS","College of Computer Studies (CCS)");
-
+$departments = array(
+OSAS,
+REG,
+COE,
+CIT,
+CBMA,
+CAS,
+CTE,
+CCJE,
+CHMT,
+CCS
+);
 
 function db_connect() {
     $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -95,19 +106,19 @@ function get_announcement_today_by_department($department){
 function templater($announcement,$class){
 	$a = $announcement;
 	if($a["post_type"] == "text"){
-		$template = "<div class='{$class} text_post'><p><span class='label'>Department: </span>{$a['department']}</p><h3 class='text_post'><span>Announcement: </span><br>";
+		$template = "<div class='{$class} text_post post'><p><span class='label'>{$a['department']}</span></p><h3 class='text_post'><span>Announcement: </span><br>";
 		$template .= $a["content"]."</h3></div>";
 		return $template;
 	}elseif($a["post_type"] == "image"){
-		$template = "<div class='{$class} image_post'><p><span class='label'>Department:</span>{$a['department']} <br><em>Click image to Enlarge</em></p><div><a href='images/{$a["content"]}' data-lity><img src='images/";
-		$template .= $a["content"]."' class='img_post'></a></div></div>";
+		$template = "<div class='{$class} image_post post'><p><span class='label'>{$a['department']}</span> <br><em>Click image to Enlarge</em></p><div><img data-lity src='images/";
+		$template .= $a["content"]."' class='img_post'></div></div>";
 		return $template;
 	}elseif($a["post_type"] == "video"){
-		$template = "<div class='{$class} video_post'><p><span class='label'>Department: </span>{$a['department']} <br><em>Click Video to Enlarge</em></p><div><video class='video' autoplay muted loop src='videos/";
+		$template = "<div class='{$class} video_post post'><p><span class='label'>{$a['department']}</span> <br><em>Click Video to Enlarge</em></p><div><video class='video' autoplay muted loop src='videos/";
 		$template .= $a["content"]."' ></div></div>";
 		return $template;
 	}else{
-		$template = "<div class='{$class}'><p class='dept_text'><span class='label'>Department: </span>".$a['department'];
+		$template = "<div class='{$class} post'><p class='dept_text'><span class='label'>{$a['department']}</span>";
 		$template .= "</p><h3>No Announcement<h3></div>";
 		return $template;
 	}
@@ -120,4 +131,29 @@ function div_generator($dept1, $dept2)
 	$a = get_announcement_today_by_department($dept1);
 	$b = get_announcement_today_by_department($dept2);
 	return templater($a, "show").templater($b, "hide");
+}
+
+/**
+List all anouncements from all deparments:
+exceptions: departments without announcements
+			departments with video anouncments
+**/
+function main_generator()
+{
+	global $departments;
+	$posts = array();
+	$html = "<ul class='all'>";
+	foreach($departments as $dept):
+		$post = get_announcement_today_by_department($dept);
+		if($post['post_type'] != 'none' OR $post['post_type'] != 'video'){
+			if($post['post_type'] == 'text')
+			{
+				$html .= "<li><p><span class='label'>Department:</span> {$post['department']}</p><div><p><span class='label'>Announcement: </span><span class='text_anouncement'>{$post['content']}</span></p></li>";
+			}elseif($post['post_type'] == 'image'){
+				$html .= "<li class='image'><p><span class='label'>Department: </span>{$post['department']}</p><div><p><span class='label'>Announcement: </span> <img data-lity class='main-div-img'  src='images/{$post['content']}'></p></div></li>";
+			}
+		}
+	endforeach;
+	$html .= '</ul>';
+	return $html;
 }

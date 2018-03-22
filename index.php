@@ -1,4 +1,4 @@
-<?php include("star.php"); ?>
+<?php include("star.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,47 +11,51 @@
     <link rel="stylesheet" href="jquery.popVideo.css">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="main-wrapper">
-        <div class="first-half">
-            <div class="row">
-                <div class="seven columns main">
-                    <h1>Main</h1>
-                </div>
-                <div class="five columns">
-                    <div class="row main-2">
-                        <div class="twelve columns main-2a">
-                        <?php echo div_generator(OSAS,REG) ?>
-                        </div>
-                        <div class="twelve columns main-2b">
-                        <?php echo div_generator(COE,CIT) ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="first-half"> -->
-        <div class="second-half">
-            <div class="row">
-                <div class="four columns main-3">
-                <?php echo div_generator(CBMA,CAS) ?>
-                </div>
-                <div class="four columns main-4">
-                <?php echo div_generator(CTE,CCJE) ?>
-                </div>
-                <div class="four columns main-5">
-                <?php echo div_generator(CHMT,CCS) ?>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="second-half"> -->
-        <!-- <div class="main-wrapper"> -->
-    </div>
-    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+
+	<div class="first">
+		<div class="row">
+			<div class="seven columns main">
+				<?php echo main_generator(); ?>
+			</div>
+			<div class="five columns">
+				<div class="twelve columns">
+					 <?php echo div_generator(OSAS,REG) ?>
+				</div>
+				<div class="twelve columns">
+					<?php echo div_generator(COE,CIT) ?>
+				</div>
+			</div>
+		</div>
+	</div><!-- <div class="first"> -->
+	<div class="second">
+			<div class="row">
+				<div class="four columns">
+					<?php echo div_generator(CBMA,CAS) ?>
+				</div>
+				<div class="four columns">
+					<?php echo div_generator(CTE,CCJE) ?>
+				</div>
+				<div class="four columns">
+					<?php echo div_generator(CHMT,CCS) ?>
+				</div>
+			</div>
+	</div><!-- <div class="second"> -->  
+
+
+
+	<!-- scripts   -->
+	<!-- scripts   -->
+
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
     <script src="lity.min.js"></script>
     <script src="jquery.popVideo.min.js"></script>
     <script>
+        $(document).ready(function(){
+
+        /**
+
+        **/	
         window.setInterval(function(){
             $('.show').hide("fast", function(){
                 $('.hide').show("fast");
@@ -62,13 +66,25 @@
                 $('.show').show("fast");
             });
         },10000);//double the time interval here (10000 milliseconds)
+        /**
 
+        **/
         $('.video').click(function(){
            $('.video').popVideo({
             playOnOpen: true,
            }).open();
         });
-    </script>
-</body>
+        /**
 
+        **/
+        var init_height = $('.main').outerHeight();
+        $('.twelve.columns').css('height',(init_height/2+20));
+
+        })
+        
+    </script>
+
+	<!-- scripts   -->
+	<!-- scripts   -->
+</body>
 </html>

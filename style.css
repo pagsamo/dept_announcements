@@ -8,7 +8,7 @@ html, body {
   font-family: "Tahoma", Arial, sans-serif;
 }
 
-.label{ font-weight: bolder; }
+.label{ font-weight: bolder; color: #44475A; }
 img[src*="spacer.jpg"] {display: none;}
 
 ul {
@@ -87,25 +87,31 @@ ul {
 /*Main*/
 /************************************************************************************************/
 /************************************************************************************************/
-h1{ margin:0; }
 .hide{ display: none; }
-.main-wrapper{ width:100%; margin:0 auto; }
-.main{ background-color:#D5D5D5; }
-.main-2a{ background-color: #FFC3C4; }
-.main-2b{ background-color: #ACFFC5; }
-.main-3{ background-color: #FFFF66; }
-.main-4{ background-color: #979DFF; }
-.main-5{ background-color: #EA75FF; }
+
+.first{ background-color: #D5D5D5; }
+.first .seven.columns{ width:66.67%; margin-left:0; padding:3%;}
+.first .seven.columns{ background-color: #D5D5D5; }
+.first .five.columns{ width:33.33%; margin-left: 0; }
+.first .five.columns .twelve.columns{ display: flex; justify-content: center; }
+.first .five.columns .twelve.columns:first-child{ background-color: #FFC3C4; }
+.first .five.columns .twelve.columns:last-child{ background-color: #ACFFC5; }
+.second .four.columns{ width:33.333%; margin-left:0; height:350px; display: flex; justify-content: center;  }
+.second .four.columns:first-child{ background-color: #FFFF66; }
+.second .four.columns:nth-child(2){ background-color: #979DFF; }
+.second .four.columns:last-child{background-color: #EA75FF; }
+
+.main .all li{ list-style: none; border-bottom:0.5px solid grey; }
+li.image div{ display: flex; }
+li.image div p{ display: flex; justify-content: center; }
+li.image div p span{ align-self: center; }
+li.image div p img{ align-self: center; margin-left:10px; }
 
 
-.first-half .seven.columns{ width: 66.5%; margin-left:0; height:600px;}
-.first-half .five.columns{ width:33.5%; margin-left:0;}
-.first-half .five.columns .twelve.columns{ height:300px;  padding:2%;}
-.second-half .four.columns{ width:33.333%; margin-left:0; height:300px; padding:2%;}
+.all img, .post video, .post img{ height: 200px; }
 
-
-.image_post div, .video_post div{ text-align: center; }
-.image_post img, .video_post div video{ width:50%; }
+.post{ text-align: center; padding:2%; align-self: center; }
+img:hover, video:hover{ cursor: pointer; }
 /************************************************************************************************/
 /************************************************************************************************/
 /*Main*/
@@ -125,14 +131,7 @@ h1{ margin:0; }
 @media (min-width: 900px) and (max-width: 1200px) {
 /************************************************************************************************/
 /************************************************************************************************/
-.main-wrapper{ width:100%; margin:0 auto; }
-.first-half .seven.columns{ width: 66.5%; margin-left:0; height:400px;}
-.first-half .five.columns{ width:33.5%; margin-left:0;}
-.first-half .five.columns .twelve.columns{ height:200px;  padding:2%;}
-.second-half .four.columns{ width:33.333%; margin-left:0; height:200px; padding:2%;}
-.img_post{ width:50%; margin:0 auto; float: none; }
-p{ font-size: 0.7em; margin-bottom:0;}
-h3{ font-size:1em; margin-top:0; margin-bottom:0; }
+.first .seven.columns, .first .five.columns, .second .four.columns{ width:100%; margin-left:0; }
 /************************************************************************************************/
 /************************************************************************************************/
 }
@@ -151,13 +150,7 @@ h3{ font-size:1em; margin-top:0; margin-bottom:0; }
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
-.first-half .seven.columns{ width:100%; margin-left:0; }
-.first-half .five.columns{ width:100%; margin-left:0; }
-.first-half .five.columns .row{ width:100%; margin-left:0; }
-.second-half .four.columns{ width:100%; margin-left:0; }
-p{ font-size: 0.7em; margin-bottom:0;}
-h3{ font-size:1em; margin-top:0; margin-bottom:0; }
-
+.first .seven.columns, .first .five.columns, .second .four.columns{ width:100%; margin-left:0; }
 /************************************************************************************************/
 /************************************************************************************************/
 }
