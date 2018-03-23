@@ -22,18 +22,7 @@ define("CTE","College of Teacher Education (CTE)");
 define("CCJE","College of Criminal Justice Education (CCJE)");
 define("CHMT","College of Hotel Management and Tourism (CHMT)");
 define("CCS","College of Computer Studies (CCS)");
-$departments = array(
-OSAS,
-REG,
-COE,
-CIT,
-CBMA,
-CAS,
-CTE,
-CCJE,
-CHMT,
-CCS
-);
+$departments = array(OSAS,REG,COE,CIT,CBMA,CAS,CTE,CCJE,CHMT,CCS);
 
 function db_connect() {
     $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -148,9 +137,9 @@ function main_generator()
 		if($post['post_type'] != 'none' OR $post['post_type'] != 'video'){
 			if($post['post_type'] == 'text')
 			{
-				$html .= "<li><p><span class='label'>Department:</span> {$post['department']}</p><div><p><span class='label'>Announcement: </span><span class='text_anouncement'>{$post['content']}</span></p></li>";
+				$html .= "<li><h2>{$post['department']}</h2><div><p><span class='label'>Announcement</span></p><h1>{$post['content']}</h1></li>";
 			}elseif($post['post_type'] == 'image'){
-				$html .= "<li class='image'><p><span class='label'>Department: </span>{$post['department']}</p><div><p><span class='label'>Announcement: </span> <img data-lity class='main-div-img'  src='images/{$post['content']}'></p></div></li>";
+				$html .= "<li class='image'><h2>{$post['department']}</h2><p><span class='label'>Announcement</span></p><img data-lity class='main-div-img'  src='images/{$post['content']}'></li>";
 			}
 		}
 	endforeach;

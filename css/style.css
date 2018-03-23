@@ -89,11 +89,10 @@ ul {
 /************************************************************************************************/
 .hide{ display: none; }
 
-.first{ background-color: #D5D5D5; }
-.first .seven.columns{ width:66.67%; margin-left:0; padding:3%;}
-.first .seven.columns{ background-color: #D5D5D5; }
-.first .five.columns{ width:33.33%; margin-left: 0; }
-.first .five.columns .twelve.columns{ display: flex; justify-content: center; }
+.first{ background-color: #44475A; }
+.first .seven.columns{ width:66.67%; margin-left:0; padding:4% 3%; background-color: #44475A; color: white;}
+.first .five.columns{ width:33.33%; margin-left: 0; background-color: #ACFFC5; }
+.first .five.columns .twelve.columns{ display: flex; justify-content: center; height:350px;}
 .first .five.columns .twelve.columns:first-child{ background-color: #FFC3C4; }
 .first .five.columns .twelve.columns:last-child{ background-color: #ACFFC5; }
 .second .four.columns{ width:33.333%; margin-left:0; height:350px; display: flex; justify-content: center;  }
@@ -101,11 +100,12 @@ ul {
 .second .four.columns:nth-child(2){ background-color: #979DFF; }
 .second .four.columns:last-child{background-color: #EA75FF; }
 
-.main .all li{ list-style: none; border-bottom:0.5px solid grey; }
-li.image div{ display: flex; }
-li.image div p{ display: flex; justify-content: center; }
-li.image div p span{ align-self: center; }
-li.image div p img{ align-self: center; margin-left:10px; }
+
+.main .all li{ list-style: none; text-align: center; align-self: center; }
+.main .all li img{ float: none; margin:0 auto; width:500px; height: auto; }
+.main .all li span{ color: white; }
+
+
 
 
 .all img, .post video, .post img{ height: 200px; }

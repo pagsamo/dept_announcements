@@ -7,9 +7,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1;" />
-    <link rel="stylesheet" href="lity.min.css">
-    <link rel="stylesheet" href="jquery.popVideo.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/lity.min.css">
+    <link rel="stylesheet" href="css/jquery.popVideo.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -47,23 +49,35 @@
 	<!-- scripts   -->
 	<!-- scripts   -->
 
-<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
-    <script src="lity.min.js"></script>
-    <script src="jquery.popVideo.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/lity.min.js"></script>
+    <script src="js/jquery.popVideo.min.js"></script>
+    <script src="js/slick.min.js"></script>
     <script>
         $(document).ready(function(){
+        $('.all').slick({
+            autoplay: true,
+            autoplaySpeed: 3000,
+            dots: true,
+            infinite: true,
+            speed: 500,
+            fade: true,
+            cssEase: 'linear',
+            arrows: false,
+            adaptiveHeight:true,
+        });
 
         /**
-
+    
         **/	
         window.setInterval(function(){
             $('.show').hide("fast", function(){
-                $('.hide').show("fast");
+                $('.hide').show("slow");
             });
         },5000);//put the time interval of changing announcements here (5000 milliseconds)
         window.setInterval(function(){
             $('.hide').hide("fast", function(){
-                $('.show').show("fast");
+                $('.show').show("slow");
             });
         },10000);//double the time interval here (10000 milliseconds)
         /**
@@ -77,8 +91,12 @@
         /**
 
         **/
-        var init_height = $('.main').outerHeight();
-        $('.twelve.columns').css('height',(init_height/2+20));
+        // var init_height = $('.main').outerHeight();
+        // $('.twelve.columns').css('height',(init_height/2+20));
+
+        $('.all').resize(function(){
+            console.log("test")
+        });
 
         })
         
