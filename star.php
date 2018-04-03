@@ -1,12 +1,5 @@
 <?php 
 
-/**
-1. Get all announcement where date is acceptable today
-2. Filter what department
-3. If department no result = no further announcement on this 
-4. Else get post_type
-5. Render announcement based on post type
-**/
 
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
@@ -23,6 +16,12 @@ define("CCJE","College of Criminal Justice Education (CCJE)");
 define("CHMT","College of Hotel Management and Tourism (CHMT)");
 define("CCS","College of Computer Studies (CCS)");
 $departments = array(OSAS,REG,COE,CIT,CBMA,CAS,CTE,CCJE,CHMT,CCS);
+
+
+function get_abbrv($department){
+    $string = explode( "(", $department);
+    return strtolower(str_replace(")","",end($string)));
+}
 
 function db_connect() {
     $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -94,6 +93,12 @@ function get_announcement_today_by_department($department){
 
 function templater($announcement,$class){
 	$a = $announcement;
+	if($a["post_type"] == "none" AND $a["department"] == REG OR $a["post_type"] == "none" AND $a["department"] == OSAS ){
+		$template = "<div class='{$class} text_post post'><p><span class='label'>{$a['department']}</span></p><h3 class='text_post'><span>Announcement: </span><br>";
+		$template .= "No Announcement</h3></div>";
+		return $template;
+	}
+
 	if($a["post_type"] == "text"){
 		$template = "<div class='{$class} text_post post'><p><span class='label'>{$a['department']}</span></p><h3 class='text_post'><span>Announcement: </span><br>";
 		$template .= $a["content"]."</h3></div>";
@@ -107,8 +112,9 @@ function templater($announcement,$class){
 		$template .= $a["content"]."' ></div></div>";
 		return $template;
 	}else{
-		$template = "<div class='{$class} post'><p class='dept_text'><span class='label'>{$a['department']}</span>";
-		$template .= "</p><h3>No Announcement<h3></div>";
+		$abbrv = get_abbrv($a["department"]);
+		$template = "<div class='{$class} video_post post'><p><span class='label'>{$a['department']}</span> <br><em>Click Video to Enlarge</em></p><div><video class='video' autoplay muted loop src='videos/default/";
+		$template .= $abbrv.".mp4' ></div></div>";
 		return $template;
 	}
 }
@@ -129,6 +135,9 @@ exceptions: departments without announcements
 **/
 function main_generator()
 {
+	if(get_all_announcement_today()->num_rows == 0){
+		return '<div class="defaut_vid" style="margin:0 auto; text-align: center; float:none;"><video style="width:90%" autoplay muted loop src="videos/default/default.mp4"></video></div>';
+	}
 	global $departments;
 	$posts = array();
 	$html = "<ul class='all'>";
