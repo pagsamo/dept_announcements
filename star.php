@@ -81,13 +81,17 @@ function get_announcement_today_by_department($department){
 	$sql = "SELECT * FROM announcement ";
 	$sql .= "WHERE startdate <= '".$today."' ";
 	$sql .= "AND enddate >= '".$today."' "; 
-	$sql .= "And department = '".$department."' LIMIT 1";
+	$sql .= "And department = '".$department."'";
 	$result = mysqli_query($db, $sql);
 	confirm_result_set($result);
 	if(mysqli_num_rows($result) > 0){
-		return $result->fetch_assoc();
+		$announcements = array();
+		while($row = $result->fetch_assoc()):
+			array_push($announcements, $row);
+		endwhile;
+		return $announcements;
 	}
-	return array("department"=>$department,"post_type"=>"none");
+	return array(array("department"=>$department,"post_type"=>"none", "content"=>"No Announcement"));
 }
 
 
@@ -107,14 +111,9 @@ function templater($announcement,$class){
 		$template = "<div class='{$class} image_post post'><p><span class='label'>{$a['department']}</span> <br><em>Click image to Enlarge</em></p><div><img data-lity src='images/";
 		$template .= $a["content"]."' class='img_post'></div></div>";
 		return $template;
-	}elseif($a["post_type"] == "video"){
-		$template = "<div class='{$class} video_post post'><p><span class='label'>{$a['department']}</span> <br><em>Click Video to Enlarge</em></p><div><video class='video' autoplay muted loop src='videos/";
-		$template .= $a["content"]."' ></div></div>";
-		return $template;
 	}else{
-		$abbrv = get_abbrv($a["department"]);
-		$template = "<div class='{$class} video_post post'><p><span class='label'>{$a['department']}</span> <br><em>Click Video to Enlarge</em></p><div><video class='video' autoplay muted loop src='videos/default/";
-		$template .= $abbrv.".mp4' ></div></div>";
+		$template = "<div class='{$class} text_post post'><p><span class='label'>{$a['department']}</span></p><h3 class='text_post'><span>Announcement: </span><br>";
+		$template .= "No Announcement</h3></div>";
 		return $template;
 	}
 }
@@ -136,22 +135,51 @@ exceptions: departments without announcements
 function main_generator()
 {
 	if(get_all_announcement_today()->num_rows == 0){
-		return '<div class="defaut_vid" style="margin:0 auto; text-align: center; float:none;"><video style="width:90%" autoplay muted loop src="videos/default/default.mp4"></video></div>';
+		return '<div class="defaut_vid" style="margin:0 auto; text-align: center; float:none;"><video class="video" style="width:90%" autoplay muted loop src="videos/default/default.mp4"></video></div>';
 	}
 	global $departments;
 	$posts = array();
 	$html = "<ul class='all'>";
 	foreach($departments as $dept):
-		$post = get_announcement_today_by_department($dept);
-		if($post['post_type'] != 'none' OR $post['post_type'] != 'video'){
-			if($post['post_type'] == 'text')
-			{
-				$html .= "<li><h2>{$post['department']}</h2><div><p><span class='label'>Announcement</span></p><h1>{$post['content']}</h1></li>";
-			}elseif($post['post_type'] == 'image'){
-				$html .= "<li class='image'><h2>{$post['department']}</h2><p><span class='label'>Announcement</span></p><img data-lity class='main-div-img'  src='images/{$post['content']}'></li>";
-			}
-		}
+		$as = get_announcement_today_by_department($dept);
+		foreach($as as $post):
+        	if($post['post_type'] != 'none'){
+				if($post['post_type'] == 'text')
+					{
+						$html .= "<li><h2>{$post['department']}</h2><div><p><span class='label'>Announcement</span></p><h1>{$post['content']}</h1></li>";
+					}elseif($post['post_type'] == 'image'){
+						$html .= "<li class='image'><h2>{$post['department']}</h2><p><span class='label'>Announcement</span></p><img data-lity class='main-div-img'  src='images/{$post['content']}'></li>";
+					}
+				}
+    	endforeach;
 	endforeach;
 	$html .= '</ul>';
 	return $html;
 }
+
+
+function template_div($type, $content, $department)
+{
+    $template = "<div><h4>{$department}<br><span class='label'>Announcement: </span></h4>";
+    if($type == 'image'){
+        $template .= "<img src='images/{$content}' alt=''></div>";
+        return $template;
+    }elseif( $type == 'text'){
+        $template .= "<h3>{$content}</h3></div>";
+        return $template;
+    }else{
+        $template .= "<h3>No Announcement</h3></div>";
+        return $template;
+    }
+}
+
+
+function new_templater($department){
+    $template = "";
+    $a = get_announcement_today_by_department($department);
+    foreach($a as $i):
+        $template .= template_div($i['post_type'],$i['content'],$i['department']);
+    endforeach;
+    return $template;
+}
+

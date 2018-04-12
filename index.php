@@ -1,6 +1,7 @@
 <?php include("star.php") ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Landing-Page</title>
     <meta charset="utf-8" />
@@ -13,96 +14,95 @@
     <link rel="stylesheet" href="css/slick-theme.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-	<div class="first">
-		<div class="row">
-			<div class="seven columns main">
-				<?php echo main_generator(); ?>
-			</div>
-			<div class="five columns">
-				<div class="twelve columns">
-					 <?php echo div_generator(OSAS,REG) ?>
-				</div>
-				<div class="twelve columns">
-					<?php echo div_generator(COE,CIT) ?>
-				</div>
-			</div>
-		</div>
-	</div><!-- <div class="first"> -->
-	<div class="second">
-			<div class="row">
-				<div class="four columns">
-					<?php echo div_generator(CBMA,CAS) ?>
-				</div>
-				<div class="four columns">
-					<?php echo div_generator(CTE,CCJE) ?>
-				</div>
-				<div class="four columns">
-					<?php echo div_generator(CHMT,CCS) ?>
-				</div>
-			</div>
-	</div><!-- <div class="second"> -->  
+    <div class="first">
+        <div class="row">
+            <div class="seven columns main">
+                <div><?php echo main_generator(); ?></div>
+            </div>
+            <div class="five columns">
+                <div class="twelve columns">
+                    <div class="sub">
+                        <?php echo new_templater(OSAS) ?>
+                        <?php echo new_templater(REG) ?>
+                    </div>
+                </div>
+                <div class="twelve columns">
+                    <div class="sub">
+                        <?php echo new_templater(COE) ?>
+                        <?php echo new_templater(CIT) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="first"> -->
+
+    <div class="second">
+        <div class="row">
+            <div class="four columns">
+                <div class="sub">
+                    <?php echo new_templater(CBMA) ?>
+                    <?php echo new_templater(CAS) ?>
+                </div>
+            </div>
+            <div class="four columns">
+                <div class="sub">
+                    <?php echo new_templater(CTE) ?>
+                    <?php echo new_templater(CCJE) ?>
+                </div>
+            </div>
+            <div class="four columns">
+                <div class="sub">
+                    <?php echo new_templater(CHMT) ?>
+                    <?php echo new_templater(CCS) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="second"> -->
 
 
 
-	<!-- scripts   -->
-	<!-- scripts   -->
+    <!-- scripts   -->
+    <!-- scripts   -->
 
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <script src="js/lity.min.js"></script>
     <script src="js/jquery.popVideo.min.js"></script>
     <script src="js/slick.min.js"></script>
     <script>
-        $(document).ready(function(){
-        $('.all').slick({
-            autoplay: true,
-            autoplaySpeed: 3000,
-            dots: true,
-            infinite: true,
-            speed: 500,
-            fade: true,
-            cssEase: 'linear',
-            arrows: false,
-            adaptiveHeight:true,
-        });
-
-        /**
-    
-        **/	
-        window.setInterval(function(){
-            $('.show').hide("fast", function(){
-                $('.hide').show("slow");
+        $(document).ready(function () {
+            $('.all').slick({
+                autoplay: true,
+                autoplaySpeed: 5000,
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                arrows: false,
+                adaptiveHeight: true,
             });
-        },5000);//put the time interval of changing announcements here (5000 milliseconds)
-        window.setInterval(function(){
-            $('.hide').hide("fast", function(){
-                $('.show').show("slow");
+
+            $('.sub').slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                arrows: false,
             });
-        },10000);//double the time interval here (10000 milliseconds)
-        /**
-
-        **/
-        $('.video').click(function(){
-           $('.video').popVideo({
-            playOnOpen: true,
-           }).open();
-        });
-        /**
-
-        **/
-        // var init_height = $('.main').outerHeight();
-        // $('.twelve.columns').css('height',(init_height/2+20));
-
-        $('.all').resize(function(){
-            console.log("test")
-        });
 
         })
-        
+
     </script>
 
-	<!-- scripts   -->
-	<!-- scripts   -->
+    <!-- scripts   -->
+    <!-- scripts   -->
 </body>
+
 </html>

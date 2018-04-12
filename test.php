@@ -1,4 +1,6 @@
 <?php
 require("star.php");
 
-var_dump(div_generator(COE,CIT));
+foreach($departments as $d):
+    echo new_templater($d);
+endforeach;
