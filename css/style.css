@@ -99,13 +99,13 @@ ul {
 .second .four.columns:last-child{background-color: #EA75FF; }
 
 
-.main{ text-align: center; padding:10% 4%;}
+.main{ text-align: center; padding:5% 4%;}
 .main img{margin:0 auto; float: none;}
 
 .sub{ text-align: center; }
 .sub img{ width: 50%; float: none; margin:0 auto; }
 
-.all img, .post video, .post img{ height: 200px; }
+.all img, .post video, .post img{ height: 350px; }
 img:hover, video:hover{ cursor: pointer; }
 
 
