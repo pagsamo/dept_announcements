@@ -162,7 +162,7 @@ function template_div($type, $content, $department)
 {
     $template = "<div><h4>{$department}<br><span class='label'>Announcement: </span></h4>";
     if($type == 'image'){
-        $template .= "<img src='images/{$content}' alt=''></div>";
+        $template .= "<img data-lity src='images/{$content}' alt=''></div>";
         return $template;
     }elseif( $type == 'text'){
         $template .= "<h3>{$content}</h3></div>";
